@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vibe-coding-platform.com/schemas/order-created.json",
+  "title": "OrderCreated",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string", "format": "uuid" },
+    "eventType": { "type": "string", "const": "OrderCreated" },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "orderId": { "type": "string" },
+    "userId": { "type": "string" },
+    "totalAmount": { "type": "number" },
+    "currency": { "type": "string" },
+    "sourceSystem": { "type": "string" },
+    "metadata": { "type": "object" }
+  },
+  "required": [
+    "eventId",
+    "eventType",
+    "occurredAt",
+    "orderId",
+    "userId",
+    "totalAmount",
+    "currency"
+  ]
+}
