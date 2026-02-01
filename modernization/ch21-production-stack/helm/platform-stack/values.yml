@@ -1,0 +1,52 @@
+# Ch21 Complete Production Stack
+global:
+  imagePullSecrets: []
+  nameOverride: "vibe-coding"
+  fullnameOverride: "vibe-coding-platform"
+
+apiGateway:
+  enabled: true
+  replicaCount: 2
+  service:
+    type: LoadBalancer
+    ports:
+      http: 80
+
+services:
+  user:
+    enabled: true
+    image: "your-registry/user-service:latest"
+    ports:
+      http: 3001
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 10
+      targetCPUUtilizationPercentage: 70
+
+  order:
+    enabled: true
+    image: "your-registry/order-service:latest" 
+    ports:
+      http: 3002
+
+observability:
+  otelCollector:
+    enabled: true
+    configMap:
+      create: true
+  grafana:
+    enabled: true
+    adminPassword: "vibecoding123"
+  prometheus:
+    enabled: true
+    prometheusSpec:
+      serviceMonitorSelectorNilUsesHelmValues: false
+
+database:
+  postgresql:
+    enabled: true
+    auth:
+      postgresPassword: "vibecoding123"
+      username: "platform"
+      database: "vibecoding"

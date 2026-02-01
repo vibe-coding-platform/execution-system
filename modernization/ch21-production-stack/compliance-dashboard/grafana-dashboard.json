@@ -1,0 +1,32 @@
+{
+  "title": "Platform Compliance Dashboard",
+  "panels": [
+    {
+      "title": "Golden Path Compliance",
+      "type": "stat",
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              {"color": "red", "value": null},
+              {"color": "yellow", "value": 80},
+              {"color": "green", "value": 95}
+            ]
+          }
+        }
+      },
+      "targets": [{"expr": "golden_path_compliance{job=\"platform\"}"}]
+    },
+    {
+      "title": "Deploy Frequency (DORA)",
+      "type": "stat",
+      "targets": [{"expr": "rate(deployments_total[24h])"}]
+    },
+    {
+      "title": "Services by Pattern Compliance",
+      "type": "piechart",
+      "targets": [{"expr": "count by (compliance_level) (service_compliance{job=\"platform\"})"}]
+    }
+  ]
+}
+
