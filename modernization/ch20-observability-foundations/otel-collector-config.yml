@@ -1,0 +1,48 @@
+# Ch20 OpenTelemetry Collector - Production config
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 1s
+    send_batch_size: 1024
+  memory_limiter:
+    limit_mib: 512
+    check_interval: 1s
+  resource:
+    attributes:
+      - key: service.name
+        value: "unknown_service"
+        action: insert
+      - key: deployment.environment
+        value: "${ENVIRONMENT}"
+        action: upsert
+
+exporters:
+  otlp/tempo:
+    endpoint: "tempo:4317"
+    tls:
+      insecure: true
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+  logging:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource, memory_limiter, batch]
+      exporters: [otlp/tempo, logging]
+    metrics:
+      receivers: [otlp]
+      processors: [resource, memory_limiter, batch]
+      exporters: [prometheus, logging]
+  telemetry:
+    logs:
+      level: "info"

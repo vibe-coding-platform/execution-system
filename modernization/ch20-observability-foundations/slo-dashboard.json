@@ -1,0 +1,28 @@
+{
+  "title": "Vibe Coding SLOs",
+  "panels": [
+    {
+      "title": "Deploy → Prod Latency",
+      "type": "stat",
+      "targets": [{
+        "expr": "histogram_quantile(0.95, sum(rate(span_duration_bucket{operation.name=\"deploy\"}[5m])) by (le)) < 300",
+        "legendFormat": "p95"
+      }],
+      "thresholds": [
+        {"color": "green", "value": null},
+        {"color": "yellow", "value": 300},
+        {"color": "red", "value": 600}
+      ]
+    },
+    {
+      "title": "Pattern Compliance",
+      "type": "stat",
+      "targets": [{"expr": "pattern_compliance_ratio > 0.95"}],
+      "thresholds": [
+        {"color": "green", "value": null},
+        {"color": "yellow", "value": 0.95},
+        {"color": "red", "value": 0.8}
+      ]
+    }
+  ]
+}
