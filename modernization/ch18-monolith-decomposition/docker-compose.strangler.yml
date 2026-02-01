@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  monolith:
+    image: your-legacy-monolith
+    ports:
+      - "8080:8080"
+  
+  nginx-facade:
+    image: nginx
+    volumes:
+      - ./strangler-facade/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - monolith
+      
+  user-service:
+    image: your-user-microservice
+    ports:
+      - "3001:3001"
