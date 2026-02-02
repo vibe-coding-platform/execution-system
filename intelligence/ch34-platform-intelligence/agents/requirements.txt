@@ -1,0 +1,18 @@
+# 1. Pinecone index (2.5GB Ch17-30)
+pip install pinecone-client langchain-openai neo4j langchain-community
+pinecone create --name ch17-30-modernization --dimension 1536 --metric cosine
+
+# 2. Neo4j (local/prod)
+docker run -p 7474:7474 -p 7687:7687 \
+  -e NEO4J_AUTH=neo4j/password \
+  neo4j:latest
+
+# 3. Extract KG from Ch17-30
+python ch32-rag-unification/extract_kg.py
+
+# 4. Deploy RAG API
+uvicorn ch32-rag-unification.rag_unified:app --port 8000
+
+# 5. Test agent query
+curl "http://localhost:8000/retrieve?query=deploy+Payment+API"
+
