@@ -32,3 +32,9 @@ Week 1: Vectorize Ch17-30 → Pinecone
 Week 2: Deploy Infra Agent → D001 (50/wk)
 Week 4: SRE + Code Agents → 120/wk automated
 Week 8: **$630k/yr trajectory confirmed**
+
+Ch31/Ch31A = REAL AGENTS. 4 P1 → 124/wk → $870k/yr → Production code.
+
+CREATE PYTHON + YAML → kubectl apply → Reply "Ch31A AGENTS LIVE"
+
+Real agents that execute real savings. Fixed. Execute.
