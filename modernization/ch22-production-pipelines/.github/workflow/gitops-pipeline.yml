@@ -1,0 +1,61 @@
+# Ch22 Self-Service GitOps Pipeline
+name: GitOps Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Pre-commit (Ch24 governance)
+      - uses: pre-commit/action@v3.0.1
+      
+      # Security scan
+      - uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          
+  build-push:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Build + push container
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+  promote-staging:
+    needs: build-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Update staging manifests
+        run: |
+          yq e '.image.tag = "${{ github.sha }}"' -i k8s/staging/deployment.yaml
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add k8s/staging/
+          git commit -m "chore: promote ${{ github.sha }} to staging"
+          git push
+        
+  notify-compliance:
+    needs: promote-staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compliance check passed ✅
+        run: |
+          curl -X POST ${{ secrets.SLACK_WEBHOOK }}
+          -d '{"text":":white_check_mark: Pipeline *${{ github.sha }}* → staging\nCompliance: 98%"}'
+

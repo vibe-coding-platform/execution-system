@@ -1,0 +1,33 @@
+{
+  "title": "Pipeline Compliance Dashboard",
+  "panels": [
+    {
+      "title": "Pipeline Success Rate",
+      "type": "stat",
+      "targets": [{"expr": "pipeline_success_rate{job=\"github-actions\"}"}],
+      "thresholds": [
+        {"color": "green", "value": null},
+        {"color": "yellow", "value": 95},
+        {"color": "red", "value": 90}
+      ]
+    },
+    {
+      "title": "Deploy Frequency (DORA)",
+      "type": "stat",
+      "targets": [{"expr": "rate(deploy_count[1d])"}],
+      "unit": "d"
+    },
+    {
+      "title": "Lead Time for Changes",
+      "type": "stat",
+      "targets": [{"expr": "histogram_quantile(0.95, rate(lead_time_seconds_bucket[5m]))"}],
+      "unit": "s"
+    },
+    {
+      "title": "Pipeline Stages by Duration",
+      "type": "barchart",
+      "targets": [{"expr": "sum(rate(stage_duration_seconds_bucket{stage=~\"test|build|deploy\"}[5m])) by (stage)"}]
+    }
+  ]
+}
+

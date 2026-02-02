@@ -1,0 +1,19 @@
+# Ch22 Self-Service: Developers create Argo CD apps
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${SERVICE_NAME}-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/${GITHUB_USER}/${SERVICE_NAME}
+    targetRevision: main
+    path: k8s/staging
+  destination:
+    server: https://staging-cluster.vibe-coding-platform.com
+    namespace: ${SERVICE_NAME}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
