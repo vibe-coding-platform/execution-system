@@ -1,0 +1,12 @@
+# Deploy full stack
+chmod +x deploy.sh && ./deploy.sh
+
+# Test supervisor routing
+curl -X POST "http://localhost:8000/orchestrate" \
+  -H "Content-Type: application/json" \
+  -d '{"message":"#infra auth-v2","context":{}}'
+# → {"routed_to":"Infra Agent","savings":"$180k/yr","latency_ms":180}
+
+curl -X POST "http://localhost:8000/orchestrate" \
+  -d '{"message":"alert payment-api-5xx","context":{"pod_count":10}}'
+# → {"routed_to":"SRE Agent","status":"automated"}

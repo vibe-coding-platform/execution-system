@@ -1,0 +1,20 @@
+# docker-compose.yml - 5 agents + supervisor
+version: '3.8'
+services:
+  supervisor:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+    
+  neo4j:
+    image: neo4j:latest
+    environment:
+      NEO4J_AUTH: neo4j/password
+    ports: ["7474:7474", "7687:7687"]
+    
+  pinecone-proxy:
+    image: pinecone-io/pinecone-proxy
+    environment:
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
