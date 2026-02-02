@@ -1,0 +1,31 @@
+{
+  "title": "Platform Team Compliance Dashboard",
+  "panels": [
+    {
+      "title": "Developer Productivity",
+      "type": "stat",
+      "targets": [{"expr": "developer_velocity_index{team=\"platform\"}"}]
+    },
+    {
+      "title": "Golden Path Adoption", 
+      "type": "stat",
+      "targets": [{"expr": "golden_path_adoption_pct{team=\"platform\"}"}],
+      "thresholds": [
+        {"color": "green", "value": null},
+        {"color": "yellow", "value": 80},
+        {"color": "red", "value": 60}
+      ]
+    },
+    {
+      "title": "Self-Service Usage",
+      "type": "stat",
+      "targets": [{"expr": "self_service_deploys_per_day"}]
+    },
+    {
+      "title": "Platform Team Utilization",
+      "type": "piechart",
+      "targets": [{"expr": "sum(rate(platform_task_duration{task_type=~\"roadmap|support|unplanned\"}[24h]))"}]
+    }
+  ]
+}
+

@@ -1,0 +1,25 @@
+Platform Engineering Org (15% headcount = 12 FTE)
+
+CTO
+  └── Platform VP (1)
+      ├── Platform PM (1) ← Developer voice
+      ├── Platform Architects (2)
+      │   ├── Golden Path Architect
+      │   └── Observability Architect
+      ├── Pipeline Team (3)
+      │   ├── GitOps Engineer x2
+      │   └── Compliance Engineer
+      ├── Self-Service Team (3)
+      │   ├── Portal Engineers x2  
+      │   └── Developer Experience
+      └── Run Team (2)
+          ├── SRE x2 (on-call rotation)
+
+CTO
+└── Platform VP (1)
+    ├── Platform PM (1)
+    ├── Architects (2)
+    ├── Pipelines (3) ──┐
+    ├── Self-Service (3) │ → 9 Engineers
+    └── Run (2) ────────┘
+Total: 12 FTE = 15% of 80 engineers
