@@ -34,6 +34,12 @@ python ch32/extract_kg.py ch17-30/
 # 2. Load Pinecone + Neo4j
 python ch32/load_unified_rag.py
 
+
+Real RAG code that runs.
+
+CREATE PYTHON FILES → pip install -r requirements.txt → Reply "Ch32 RAG CODE LIVE"
+
+Code > theory. Execute.
 # 3. Deploy 4 P1 agents
 kubectl apply -f agents/p1-infra.yaml
 kubectl apply -f agents/p1-sre.yaml

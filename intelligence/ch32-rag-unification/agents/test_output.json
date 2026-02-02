@@ -1,0 +1,9 @@
+{
+  "query": "deploy Payment API",
+  "vector_top3": ["Ch21-helm-k8s.md", "Ch28-battlefield.xlsx", "Ch19-events.md"],
+  "graph_path": "PaymentAPI → DEPENDS_ON → Ch19(Event schemas) → STATUS=Pending",
+  "confidence": 0.92,
+  "action": "helm install payment-api ./charts/payment --wait"
+}
+
+
