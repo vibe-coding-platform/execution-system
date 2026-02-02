@@ -1,0 +1,11 @@
+                BUSINESS VALUE →
+        ┌──────────────────────────────┐
+  ↑     │     ✅ 4 MODERNIZED          │ 1 REPLATFORMED  
+TECH    │ User Portal, Auth Service     │ Payment API
+QUALITY │                              │
+        ├──────────────────────────────┤
+        │           3 KILLED           │
+        │ CRM, Inventory, Batch Jobs  │
+        └──────────────────────────────┘
+           ❌ RED ZONE → RETIRED
+Savings: **$2.56M/yr** | Modernized: **70% portfolio**
