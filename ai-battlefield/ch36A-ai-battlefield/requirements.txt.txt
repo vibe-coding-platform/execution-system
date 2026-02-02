@@ -1,0 +1,11 @@
+# Ch36A Production Dependencies
+prefect=2.14.0
+langchain-openai=0.1.0
+fastapi=0.104.0
+uvicorn[standard]=0.24.0
+kubernetes=29.0.0
+requests=2.31.0
+pandas=2.1.0
+sqlalchemy=2.0.0
+pinecone-client=3.0.0
+neo4j=5.15.0
