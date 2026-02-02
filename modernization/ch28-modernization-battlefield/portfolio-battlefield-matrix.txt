@@ -1,0 +1,11 @@
+                BUSINESS VALUE →
+        ┌──────────────────────────────┐
+  ↑     │       GREEN ZONE            │ YELLOW ZONE
+TECH    │ Modernize → Replatform       │
+QUALITY │ User Portal  Payment API    │ Order Service
+        │ Auth Service Dashboard      │
+        ├──────────────────────────────┤
+        │ RED ZONE → KILL             │
+        │ Legacy CRM Inventory        │ Batch Jobs
+        └──────────────────────────────┘
+           Low Quality                High Quality
