@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ch34 Platform Intelligence P&L</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>🧠 Ch34 PLATFORM INTELLIGENCE - Q2 2026</h1>
+    
+    <div id="pnl-metrics">
+        <div class="metric-card">
+            <h2 id="annualized-savings">$942k/yr</h2>
+            <p>Phase 1 Trajectory</p>
+        </div>
+        <div class="metric-card">
+            <span id="success-rate">95%</span>
+            <p>Agent Accuracy</p>
+        </div>
+        <div class="metric-card">
+            <span id="executions-wk">154/wk</span>
+            <p>Volume</p>
+        </div>
+    </div>
+
+    <canvas id="agent-savings-chart"></canvas>
+    <canvas id="velocity-chart"></canvas>
+
+    <script>
+        // Real-time P&L from Ch34 API
+        async function refreshDashboard() {
+            const metrics = await (await fetch('/pnl')).json();
+            document.getElementById('annualized-savings').textContent = 
+                `$${metrics.annualized_savings.toLocaleString()}/yr`;
+            document.getElementById('success-rate').textContent = 
+                `${(metrics.success_rate*100).toFixed(1)}%`;
+        }
+        
+        // Update every 30s
+        setInterval(refreshDashboard, 30000);
+        refreshDashboard();
+    </script>
+</body>
+</html>
