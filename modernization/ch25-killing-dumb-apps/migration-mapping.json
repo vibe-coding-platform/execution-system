@@ -1,0 +1,15 @@
+{
+  "killRedirects": {
+    "reporting-v1.example.com": "new-analytics.vibe-coding.com",
+    "admin-portal-old.example.com": "self-service.vibe-coding.com",
+    "batch-job-legacy.example.com": "ch22-pipelines.vibe-coding.com"
+  },
+  "retiredApps": [
+    {
+      "name": "batch-job-legacy",
+      "replacement": "ch22-production-pipelines",
+      "savings": "$81,600/year",
+      "killed": "2026-02-15"
+    }
+  ]
+}
