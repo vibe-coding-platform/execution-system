@@ -1,0 +1,35 @@
+# Ch24 Smart Governance - Pre-commit template
+repos:
+  # 1) Basic hygiene (YAML, JSON, secrets)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: detect-private-key
+
+  # 2) JavaScript/TypeScript formatting
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        files: "\\.(js|jsx|ts|tsx|json|md|yaml|yml)$"
+
+  # 3) Python formatting
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+        language_version: python3
+
+  # 4) Vibe Coding Policy (local hook – see ./hooks/snowflake_policy.py)
+  - repo: local
+    hooks:
+      - id: vibe-snowflake-policy
+        name: "Block snowflake AI code"
+        entry: python hooks/snowflake_policy.py
+        language: system
+        types: [python, javascript, typescript]
+        stages: [commit]
